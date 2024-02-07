@@ -289,7 +289,7 @@ require("header/header.php");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     // Use encodeURIComponent para garantir que caracteres especiais e quebras de linha sejam tratados corretamente
-    var data = 'id=' + encodeURIComponent(editedCommentId) + '&comment=' + encodeURIComponent(editedComment);
+    var data = 'num=' + encodeURIComponent(editedCommentId) + '&comment=' + encodeURIComponent(editedComment);
     xhr.send(data);
   }
 

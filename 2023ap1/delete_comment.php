@@ -21,27 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Execute a declaração preparada
             if (mysqli_stmt_execute($stmt)) {
                 // A exclusão foi bem-sucedida
-                echo "Comentário excluído com sucesso.";
+                echo "Supprimé.";
             } else {
                 // Trate erros, se necessário
-                echo "Erro ao excluir o comentário: " . mysqli_error($connexion);
+                echo "Erreur a supprimer: " . mysqli_error($connexion);
             }
 
-            // Feche a declaração preparada
             mysqli_stmt_close($stmt);
         } else {
             // Trate erros de preparação da declaração, se necessário
-            echo "Erro na preparação da declaração: " . mysqli_error($connexion);
+            echo mysqli_error($connexion);
         }
 
         // Feche a conexão com o banco de dados
         mysqli_close($connexion);
     } else {
         // ID do comentário não fornecido
-        echo "ID do comentário não fornecido.";
+        echo "ID";
     }
-} else {
-    // Método de requisição inválido
-    echo "Método de requisição inválido.";
-}
+} 
 ?>

@@ -86,6 +86,7 @@ if (isset($_SESSION["login"])) {
 
 <head>
     <script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <link href="style.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
