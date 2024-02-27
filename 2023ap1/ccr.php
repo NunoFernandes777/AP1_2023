@@ -23,7 +23,7 @@ require("header/header.php");
             </tr>
             <tr>
                 <td>
-                    <a class="letter_ccr">Contenu</a> 
+
                 </td>
             </tr>
             <tr>
