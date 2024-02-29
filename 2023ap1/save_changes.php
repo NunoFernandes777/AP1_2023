@@ -10,5 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $requete = "UPDATE cr SET description = '$editedComment' WHERE num = $editedCommentId";
 
+
+    if ($connexion) {
+
+        $result = mysqli_query($connexion, $requete);
+    }
 }
 ?>

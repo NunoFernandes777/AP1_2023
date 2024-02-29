@@ -81,7 +81,7 @@ require("header/header.php");
                 $id = $donnees['num'];
                 $date = $DATE = date('d/m/Y', strtotime($donnees['date']));
                 $datetime = $donnees['datetime'];
-                $contenu = htmlspecialchars($donnees['description']);
+                $contenu = nl2br(htmlspecialchars_decode($donnees['description']));
                 $requete = "DELETE cr FROM cr
                         INNER JOIN utilisateur ON utilisateur.num = cr.num_utilisateur
                         WHERE utilisateur.num = ?";
@@ -250,15 +250,13 @@ require("header/header.php");
     text-decoration: none;
     color: white;
   }
-
-  
 </style>
 
 <script>
+
   function openEditModal(commentId, commentContent) {
     document.getElementById('editedCommentId').value = commentId;
-
-    document.getElementById('editedComment').innerHTML = commentContent;
+    document.getElementById('editedComment').value = decodeURIComponent(commentContent);
     document.getElementById('editModal').style.display = 'block';
   }
 
@@ -266,21 +264,18 @@ require("header/header.php");
     document.getElementById('editModal').style.display = 'none';
   }
 
-  /* script saveChanges */ 
-
+  /* script saveChanges */
   function saveChanges() {
     var editedCommentId = document.getElementById('editedCommentId').value;
-    var editedComment = document.getElementById('editedComment').innerHTML; // Use innerHTML para manter as quebras de linha
+    var editedComment = document.getElementById('editedComment').value;
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-          // Recarregue a página após salvar as alterações
           location.reload();
         } else {
-          // Trate erros se necessário
-          alert('Erro ao salvar as alterações.');
+          alert('Erreur.');
         }
       }
     };
@@ -288,7 +283,6 @@ require("header/header.php");
     xhr.open('POST', 'save_changes.php', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-    // Use encodeURIComponent para garantir que caracteres especiais e quebras de linha sejam tratados corretamente
     var data = 'num=' + encodeURIComponent(editedCommentId) + '&comment=' + encodeURIComponent(editedComment);
     xhr.send(data);
   }
