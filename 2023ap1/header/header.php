@@ -90,19 +90,24 @@ if (isset($_SESSION["login"])) {
     <link href="style.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
+<head>
+    <script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <link href="style.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
 <style>
     * {
         margin: 0;
         padding: 0;
     }
 
-    /* Restante do seu estilo CSS */
     .accueilpage {
         border-radius: 5px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
         width: 97%;
         margin: auto;
-        
+
     }
 
     .nav {
@@ -121,14 +126,13 @@ if (isset($_SESSION["login"])) {
         margin-top: 8px;
     }
 
-    .nav_menu_nbcr a{
+    .nav_menu_nbcr a {
         line-height: 5;
     }
 
     .nav li {
         float: left;
         margin: 0;
-        /* Remover a margem padrão */
     }
 
     .nav li a {
