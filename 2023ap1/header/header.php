@@ -10,7 +10,7 @@ if (isset($_SESSION["login"])) {
 
             <div class="accueilpage">
 
-                <ul class="nav">
+                <ul class="nav" id="menu">
                     <div class="nav_logo">
                         <li><img src="LogoRapport.png" class="layout_rapport"></img></li>
                     </div>
@@ -45,7 +45,7 @@ if (isset($_SESSION["login"])) {
 
         ?>
         <div class="accueilpage">
-            <ul class="nav">
+            <ul class="nav" id="menu">
                 <div class="nav_logo">
                     <li><img src="LogoRapport.png" class="layout_rapport"></img></li>
                 </div>
@@ -58,7 +58,7 @@ if (isset($_SESSION["login"])) {
                     <form method='post' action='index.php'>
                         <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
-                </div>   
+                </div>
             </ul>
         </div>
         <?php
@@ -76,7 +76,7 @@ if (isset($_SESSION["login"])) {
                     <form method='post' action='index.php'>
                         <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
-                </div>   
+                </div>
             </ul>
         </div>
         <?php
@@ -85,14 +85,6 @@ if (isset($_SESSION["login"])) {
 ?>
 
 <head>
-    <script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-    <link href="style.css" media="all" rel="stylesheet" type="text/css" />
-</head>
-
-<head>
-    <script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <link href="style.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
@@ -118,6 +110,7 @@ if (isset($_SESSION["login"])) {
         justify-content: space-between;
         margin: auto;
         width: 95%;
+        max-height: 80px;
     }
 
 
@@ -132,7 +125,7 @@ if (isset($_SESSION["login"])) {
 
     .nav li {
         float: left;
-        margin: 0;
+        margin: 0;    
     }
 
     .nav li a {
@@ -149,6 +142,13 @@ if (isset($_SESSION["login"])) {
         text-decoration: underline;
     }
 
+    .nav_btn {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
     .buttonDeco {
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
@@ -158,14 +158,117 @@ if (isset($_SESSION["login"])) {
         border: 2px solid black;
         border-radius: 10px;
 
-        position: absolute;
+        position: fixed;
         top: 4%;
         left: 93%;
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
-    }
+
+        margin-top: auto;
+        margin-bottom: auto;
+}
+    
 
     .buttonDeco:hover {
         cursor: pointer;
     }
+
+
+
+
+
+
+
+
+
+
+    @media only screen and (max-width: 1200px) {
+
+        .accueilpage {
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+            width: 97%;
+            margin: auto;
+
+        }
+
+        .nav {
+            list-style-type: none;
+            border-radius: 5px;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            margin: auto;
+            width: 95%;
+            max-height: 80px;
+        }
+
+
+        .layout_rapport {
+            width: 100px;
+            margin-top: 8px;
+        }
+
+        .nav_menu_nbcr a {
+            line-height: 5;
+        }
+
+        .nav li {
+            float: left;
+            margin: 0;
+        }
+
+        .nav li a {
+            width: 15px;
+            display: block;
+            color: black;
+            text-align: center;
+            font-size: 17px;
+            padding: 14px 17px;
+            text-decoration: none;
+            line-height: 3;
+            visibility: hidden;
+        }
+
+        .nav li a:hover {
+            text-decoration: underline;
+        }
+
+        .buttonDeco {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            background-color: transparent;
+            color: black;
+            padding: 8px 15px;
+            border: 2px solid black;
+            border-radius: 10px;
+
+            position: absolute;
+            top: 4%;
+            left: 93%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .buttonDeco:hover {
+            cursor: pointer;
+        }
+    }
 </style>
+
+<script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var menu = document.getElementById('menu');
+        var toggleButton = document.getElementById('toggleButton');
+
+        toggleButton.addEventListener('click', function () {
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        });
+    });
+</script>
