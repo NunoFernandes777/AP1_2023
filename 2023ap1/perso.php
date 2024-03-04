@@ -184,7 +184,7 @@ if ($_SESSION["type"] == 1) //si connexion en prof
                 <?php
                 if ($connexion = mysqli_connect($serveurBDD, $userBDD, $mdpBDD, $nomBDD)) {
                   $id = $_SESSION["id"];
-                  $requete = "SELECT utilisateur.nom, utilisateur.prenom, utilisateur.DateN, utilisateur.tel, utilisateur.email, utilisateur.option FROM utilisateur WHERE num=$_SESSION[id]"; //recupere tous les donnes utilisateur
+                  $requete = "SELECT utilisateur.nom, utilisateur.prenom, utilisateur.DateN, utilisateur.tel, utilisateur.email, utilisateur.option FROM utilisateur WHERE num=$NUM"; //recupere tous les donnes utilisateur
                   $resultat = mysqli_query($connexion, $requete);
                   while ($donnees = mysqli_fetch_assoc($resultat)) {
                     $NOM = $donnees['nom'];
@@ -204,8 +204,6 @@ if ($_SESSION["type"] == 1) //si connexion en prof
 
                     }
                     ?>
-
-                    <table class="table_boxinfo">
 
                       <tr>
                         <th colspan="2">
@@ -266,16 +264,13 @@ if ($_SESSION["type"] == 1) //si connexion en prof
                         </td>
                       </tr>
 
-                    </table>
+                    
 
                     <?php
                   }
                 }
                 ?>
               </table>
-            </div>
-            <div class="modal-content-layoutbtn">
-            </div>
           </div>
         </div>
       </div>
@@ -595,6 +590,52 @@ if ($_SESSION["type"] == 1) //si connexion en prof
 
     }
   }
+
+  /* frame profil */
+
+.prof-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.prof-modal-content {
+    background-image: linear-gradient(to right bottom, #ffbbe1, #efb6e5, #dbb1e9, #c5aeeb, #acabeb, #9bb3f1, #8bbaf3, #7dc1f3, #80d2f7, #8de2f9, #a1f1f9, #b9fffa);
+    margin: 5% auto;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    width: 65%;
+    height: max-content;
+}
+
+.prof-modal-content-layout {
+    text-align: center;
+}
+
+.table_modal-content-layoutInfo{
+  width: 44%;
+}
+
+.prof-close {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.prof-close:hover,
+.prof-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 
 <script>
