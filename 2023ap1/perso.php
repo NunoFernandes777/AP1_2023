@@ -162,24 +162,118 @@ if ($_SESSION["type"] == 1) //si connexion en prof
                       <td>$TEL</td>";
 
                 ?>
-                <td><a href="#" onclick="openProfil('<?php echo $NUM; ?>')"><i class="fa-regular fa-user"></i></a></td>
+                <td><a href="#"
+                    onclick="openProfil('<?php echo $NUM; ?>', '<?php echo $NOM; ?>', '<?php echo $PRENOM; ?>')"><i
+                      class="fa-regular fa-user"></i></a></td>
               </tr>
               <?php
             }
+
         }
 
         ?>
-
+        </table>
       </div>
-      <input type="hidden" id="editedCommentId" value="">
-      <div id="open_closeProfil" class="modal">
-        <div class="modal-content">
+      <div id="open_closeProfil" class="prof-modal">
+        <div class="prof-modal-content">
           <span class="close" onclick="closeProfil()"><i class="fa-solid fa-xmark"></i></span>
-          <div class="modal-content-layout">
-            <h1>Profil
-              <?php echo $PRENOM, ' ', $NOM ?>
-            </h1>
+          <div class="prof-modal-content-layout">
+            <h1 id="profilName"></h1>
+            <div class="modal-content-layoutInfo">
+              <table class="table_modal-content-layoutInfo">
+                <?php
+                if ($connexion = mysqli_connect($serveurBDD, $userBDD, $mdpBDD, $nomBDD)) {
+                  $id = $_SESSION["id"];
+                  $requete = "SELECT utilisateur.nom, utilisateur.prenom, utilisateur.DateN, utilisateur.tel, utilisateur.email, utilisateur.option FROM utilisateur WHERE num=$_SESSION[id]"; //recupere tous les donnes utilisateur
+                  $resultat = mysqli_query($connexion, $requete);
+                  while ($donnees = mysqli_fetch_assoc($resultat)) {
+                    $NOM = $donnees['nom'];
+                    $PRENOM = $donnees['prenom'];
+                    $DATE = $donnees['DateN'];
+                    $TEL = $donnees['tel'];
+                    $EMAIL = $donnees['email'];
+                    $OPTION = $donnees['option'];
 
+                    if ($OPTION == 1) {
+
+                      $OPTION_TXT = "Slam";
+
+                    } else {
+
+                      $OPTION_TXT = "SISR";
+
+                    }
+                    ?>
+
+                    <table class="table_boxinfo">
+
+                      <tr>
+                        <th colspan="2">
+                          <div>
+                            <img class="avatarimgperso" src="user1.png">
+                          </div>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="2">
+                          <?php echo "<b>" . $_SESSION["login"] . "</b>" ?>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <td rowspan="3" width=25%>
+                          <b>Information Utilisateur</b>
+                        </td>
+                        <td>
+                          <?php echo "<b>Prenom</b> : $PRENOM" ?>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <?php echo "<b>Nom</b> : $NOM" ?>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <?php echo "<b>DateN</b> : $DATE" ?>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td rowspan="2" width=25%>
+                          <b>Contacter</b>
+                        </td>
+                        <td>
+                          <?php echo "<b>Tel</b> : $TEL" ?>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <?php echo "<b>Email</b> : $EMAIL" ?>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td rowspan="1" width=25%>
+                          <b>Etudes</b>
+                        </td>
+                        <td>
+                          <?php echo "<b>option</b> :  $OPTION_TXT" ?>
+                        </td>
+                      </tr>
+
+                    </table>
+
+                    <?php
+                  }
+                }
+                ?>
+              </table>
+            </div>
             <div class="modal-content-layoutbtn">
             </div>
           </div>
@@ -490,12 +584,12 @@ if ($_SESSION["type"] == 1) //si connexion en prof
       text-align: left;
     }
 
-    .boxinfo_stage{
+    .boxinfo_stage {
       width: 100%;
       margin: auto;
     }
 
-    .boxinfo_tuteur{
+    .boxinfo_tuteur {
       width: 100%;
       margin: auto;
 
@@ -504,8 +598,9 @@ if ($_SESSION["type"] == 1) //si connexion en prof
 </style>
 
 <script>
-  function openProfil() {
-    document.getElementById('open_closeProfil').style.display = 'block';
+  function openProfil(NUM, NOM, PRENOM) {
+    document.getElementById("open_closeProfil").style.display = "block";
+    document.getElementById("profilName").innerHTML = 'Profil ' + PRENOM + ' ' + NOM;
   }
 
   function closeProfil() {
