@@ -1,3 +1,7 @@
+<script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <?php
 if (isset($_SESSION["login"])) {
     if ($_SESSION["type"] == 0) {
@@ -20,6 +24,18 @@ if (isset($_SESSION["login"])) {
                         <li><a href="cr.php">Compte rendus</a></li>
                         <li><a href="ccr.php">Nouveau compte-rendu</a></li>
                     </div>
+                    <!--<div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Accueil</a>
+                            <a class="dropdown-item" href="#">Profil</a>
+                            <a class="dropdown-item" href="#">Compte rendus</a>
+                            <a class="dropdown-item" href="#">Nouveau compte-rendu</a>
+                        </div>
+                    </div>-->
                     <div class="nav_menu_nbcr">
                         <?php
                         while ($donnees = mysqli_fetch_assoc($resultat)) {
@@ -32,7 +48,8 @@ if (isset($_SESSION["login"])) {
                     </div>
                     <div class="nav_btn">
                         <form method='post' action='index.php'>
-                            <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                            <button type="submit" name="deco" class="buttonDeco"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i></button>
                         </form>
                     </div>
                 </ul>
@@ -56,7 +73,8 @@ if (isset($_SESSION["login"])) {
                 </div>
                 <div class="nav_btn">
                     <form method='post' action='index.php'>
-                        <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button type="submit" name="deco" class="buttonDeco"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
                 </div>
             </ul>
@@ -74,7 +92,8 @@ if (isset($_SESSION["login"])) {
                 </div>
                 <div class="nav_btn">
                     <form method='post' action='index.php'>
-                        <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button type="submit" name="deco" class="buttonDeco"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
                 </div>
             </ul>
@@ -125,7 +144,7 @@ if (isset($_SESSION["login"])) {
 
     .nav li {
         float: left;
-        margin: 0;    
+        margin: 0;
     }
 
     .nav li a {
@@ -143,11 +162,11 @@ if (isset($_SESSION["login"])) {
     }
 
     .nav_btn {
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
 
     .buttonDeco {
         font-family: 'Poppins', sans-serif;
@@ -166,11 +185,15 @@ if (isset($_SESSION["login"])) {
 
         margin-top: auto;
         margin-bottom: auto;
-}
-    
+    }
+
 
     .buttonDeco:hover {
         cursor: pointer;
+    }
+
+    .dropdown-menu{
+        visibility: hidden;
     }
 
 
@@ -255,20 +278,3 @@ if (isset($_SESSION["login"])) {
         }
     }
 </style>
-
-<script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var menu = document.getElementById('menu');
-        var toggleButton = document.getElementById('toggleButton');
-
-        toggleButton.addEventListener('click', function () {
-            if (menu.style.display === 'block') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'block';
-            }
-        });
-    });
-</script>
