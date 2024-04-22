@@ -141,11 +141,13 @@ if (isset($_SESSION["login"])) {
     }
 
     .accueil_layout_logo {
-        margin: 7% 0% 0% 10%;
+        margin: 7% 0% 0% 5%;
     }
 
     .layout_rapport_homepage {
         width: 50%;
+        min-width: 25em;
+        max-width: 45em;
     }
 
     #chartContainer{

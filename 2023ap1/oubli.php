@@ -2,7 +2,6 @@
 <?php
 include '_conf.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['email'])){
         $lemail = $_POST['email'];
@@ -13,20 +12,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_bind_param($stmt, "s", $lemail);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        mysqli_stmt_bind_result($stmt, $num, $nom, $prenom, $tel, $login, $motdepasse, $type, $email, $option, $num_stage);
         
-        if (mysqli_stmt_fetch($stmt)) {
-            
-            $to = $lemail;
-            $subject = "Password Recovery";
-            $message = "Your login: $login\nYour password: $motdepasse"; 
-            $headers = "From: webmaster@example.com"; 
-            
-           
-            mail($to, $subject, $message, $headers);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['email'])) {
+                $lemail = $_POST['email'];
+        
+                $requete = "SELECT login, motdepasse FROM utilisateur WHERE email = ?";
+                $stmt = mysqli_prepare($connexion, $requete);
+                mysqli_stmt_bind_param($stmt, "s", $lemail);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_store_result($stmt);
+                mysqli_stmt_bind_result($stmt, $login, $motdepasse);
+        
+                if (mysqli_stmt_fetch($stmt)) {
+                    $to = $lemail;
+                    $subject = "Password Recovery";
+                    $message = "Your login: $login\nYour password: $motdepasse";
+                    $headers = "From: webmaster@example.com";
+        
+                    if (mail($to, $subject, $message, $headers)) {
+                        echo "Email sent successfully";
+                    } else {
+                        echo "Email not sent";
+                    }
+                    echo "Password recovery email sent. Please check your email.";
+                } else {
+                    echo "Email not found in the database.";
+                }
+
+                mysqli_stmt_close($stmt);
+
+            }
         }
-      }
-    }   
+    }
+}
 ?>
     <div class="designIndexbox">
         <a class="RetrouverMDP_titre">Retrouver Mdp</a>

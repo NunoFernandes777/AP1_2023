@@ -167,7 +167,7 @@ if ($_SESSION["type"] == 1) //si connexion en prof
               <?php
             }
         }
-        
+
         ?>
 
       </div>
@@ -176,8 +176,10 @@ if ($_SESSION["type"] == 1) //si connexion en prof
         <div class="modal-content">
           <span class="close" onclick="closeProfil()"><i class="fa-solid fa-xmark"></i></span>
           <div class="modal-content-layout">
-            <h1>Profil <?php echo $PRENOM,' ', $NOM ?></h1>
-            
+            <h1>Profil
+              <?php echo $PRENOM, ' ', $NOM ?>
+            </h1>
+
             <div class="modal-content-layoutbtn">
             </div>
           </div>
@@ -438,6 +440,68 @@ if ($_SESSION["type"] == 1) //si connexion en prof
 }
 
 ?>
+
+<style>
+  @media only screen and (max-width: 1000px) {
+    .decopage {
+      margin: auto;
+      display: block;
+    }
+
+    .avatarimgperso {
+
+      width: 55%;
+
+    }
+
+    .infoperso {
+
+      text-align: left;
+
+    }
+
+    .boxinfoPerso {
+      background: transparent;
+      width: 94%;
+    }
+
+    .infostage {
+
+      text-align: left;
+
+    }
+
+    .boxinfo {
+      background: transparent;
+      margin-top: 10px;
+      margin-bottom: 100px;
+      width: 94%;
+
+    }
+
+    .boxinfo_Titre {
+
+      font-size: 35px;
+
+    }
+
+    .table_boxinfo {
+      width: 100%;
+      text-align: left;
+    }
+
+    .boxinfo_stage{
+      width: 100%;
+      margin: auto;
+    }
+
+    .boxinfo_tuteur{
+      width: 100%;
+      margin: auto;
+
+    }
+  }
+</style>
 
 <script>
   function openProfil() {

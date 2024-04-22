@@ -1,3 +1,7 @@
+<script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <?php
 if (isset($_SESSION["login"])) {
     if ($_SESSION["type"] == 0) {
@@ -6,38 +10,39 @@ if (isset($_SESSION["login"])) {
         $resultat = mysqli_query($connexion, $requete);
         ?>
 
-        <header>
+       
 
-            <div class="accueilpage">
-
-                <ul class="nav">
-                    <div class="nav_logo">
-                        <li><img src="LogoRapport.png" class="layout_rapport"></img></li>
-                    </div>
-                    <div class="nav_menu">
-                        <li><a href="accueil.php">Accueil</a></li>
-                        <li><a href="perso.php">Profil</a></li>
-                        <li><a href="cr.php">Compte rendus</a></li>
-                        <li><a href="ccr.php">Nouveau compte-rendu</a></li>
-                    </div>
-                    <div class="nav_menu_nbcr">
-                        <?php
-                        while ($donnees = mysqli_fetch_assoc($resultat)) {
-                            if ($donnees['nb'] == 0)
-                                echo "<a style='color: red'><b><i class='fa-solid fa-circle-exclamation' style='color: #ff0000;'></i> Vous avez crée : $donnees[nb] comptes rendus </b></a>";
-                            else
-                                echo "<a><i class='fa-regular fa-face-smile'></i> Vous avez crée : $donnees[nb] comptes rendus </a>";
-                        }
-                        ?>
-                    </div>
-                    <div class="nav_btn">
-                        <form method='post' action='index.php'>
-                            <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-                        </form>
-                    </div>
-                </ul>
+        <nav>
+            <div class="left">
+                <div class="logo">
+                    <img src="LogoRapport.png">
+                </div>
+                <div class="links">
+                    <a href="accueil.php">Accueil</a>
+                    <a href="perso.php">Profil</a>
+                    <a href="cr.php">Compte rendus</a>
+                    <a href="ccr.php">Nouveau compte-rendu</a>
+                </div>
+            </div>  
+            <div class="middle">  
+                <div class="info">
+                    <?php
+                    while ($donnees = mysqli_fetch_assoc($resultat)) {
+                        if ($donnees['nb'] == 0)
+                            echo "<a style='color: red' class='nb_cr'><b><i class='fa-solid fa-circle-exclamation' style='color: #ff0000;'></i> Vous avez crée : $donnees[nb] comptes rendus </b></a>";
+                        else
+                            echo "<a class='nb_cr'><i class='fa-regular fa-face-smile'></i> Vous avez crée : $donnees[nb] comptes rendus </a>";
+                    }
+                    ?>
+                </div>
+            </div>    
+            <div class="buttons">
+                <form method='post' action='index.php'>
+                    <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </form> 
             </div>
-        </header>
+
+        </nav>
         <?php
     }
 
@@ -45,7 +50,7 @@ if (isset($_SESSION["login"])) {
 
         ?>
         <div class="accueilpage">
-            <ul class="nav">
+            <ul class="nav" id="menu">
                 <div class="nav_logo">
                     <li><img src="LogoRapport.png" class="layout_rapport"></img></li>
                 </div>
@@ -56,9 +61,10 @@ if (isset($_SESSION["login"])) {
                 </div>
                 <div class="nav_btn">
                     <form method='post' action='index.php'>
-                        <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button type="submit" name="deco" class="buttonDeco"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
-                </div>   
+                </div>
             </ul>
         </div>
         <?php
@@ -74,9 +80,10 @@ if (isset($_SESSION["login"])) {
                 </div>
                 <div class="nav_btn">
                     <form method='post' action='index.php'>
-                        <button type="submit" name="deco" class="buttonDeco"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button type="submit" name="deco" class="buttonDeco"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </form>
-                </div>   
+                </div>
             </ul>
         </div>
         <?php
@@ -85,8 +92,6 @@ if (isset($_SESSION["login"])) {
 ?>
 
 <head>
-    <script src="https://kit.fontawesome.com/f01ff634ff.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <link href="style.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
@@ -96,53 +101,64 @@ if (isset($_SESSION["login"])) {
         padding: 0;
     }
 
-    /* Restante do seu estilo CSS */
     .accueilpage {
         border-radius: 5px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
         width: 97%;
         margin: auto;
-        
+
     }
 
-    .nav {
-        list-style-type: none;
-        border-radius: 5px;
-        background-color: transparent;
-        display: flex;
-        justify-content: space-between;
-        margin: auto;
-        width: 95%;
-    }
-
-
-    .layout_rapport {
-        width: 100px;
-        margin-top: 8px;
-    }
-
-    .nav_menu_nbcr a{
-        line-height: 5;
-    }
-
-    .nav li {
-        float: left;
-        margin: 0;
-        /* Remover a margem padrão */
-    }
-
-    .nav li a {
-        display: block;
-        color: black;
-        text-align: center;
-        font-size: 17px;
-        padding: 14px 17px;
+    a{
         text-decoration: none;
-        line-height: 3;
+        color: #000;
+        transition: all 0.3s ease;
     }
 
-    .nav li a:hover {
+    a:hover{
         text-decoration: underline;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 80px;
+        height: 80px;
+        margin: auto;
+        background-color: transparent;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    }
+
+    nav .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    nav .left .logo img {
+        width: 100px;  
+        object-fit: cover;
+    }
+
+    nav .left .links {
+        display: flex;
+        gap: 20px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    nav .buttons {
+        display: flex;
+        gap: 14px;
+    }
+
+    nav .buttons a {
+        background-color: #eaf4f4;
+        padding: 10px;
+        color: #2d6a4f;
+        border-radius: 50%;
+        font-size: 18px;
     }
 
     .buttonDeco {
@@ -154,14 +170,68 @@ if (isset($_SESSION["login"])) {
         border: 2px solid black;
         border-radius: 10px;
 
-        position: absolute;
-        top: 4%;
-        left: 93%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     .buttonDeco:hover {
         cursor: pointer;
     }
+
+
+@media screen and (max-width:1200px) {
+    
+    nav{
+        padding: 0 40px;
+    }
+
+}
+
+@media screen and (max-width: 1015px) {
+    
+    nav .left .logo{
+        display: none;
+    }
+
+    nav .left .links{
+        font-size: 13px;
+        gap: 13px;
+    }
+
+    nav .middle .info .nb_cr{
+        font-size: 13px;
+    }
+
+    .buttonDeco {     
+        font-size: 12px;
+        padding: 6px 13px;
+    }
+
+}
+
+@media screen and (max-width:768px) {
+    
+    nav{
+        padding: 0 30px;
+    }
+
+    nav .left .links{
+        font-size: 11px;
+        gap: 14px;
+    }
+
+    nav .middle .info .nb_cr {
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width:576px) {
+    
+    .buttonDeco {     
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+}
 </style>
